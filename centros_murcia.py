@@ -16,11 +16,10 @@ while True:
  	opcionMenu = raw_input("Inserta un numero de la opción >> ") # solicituamos una opción al usuario
  	lista=[]
 	    	# Codigo que lista el nombre de todos los centros de Murcia
-		
+	with open("colegios-murcia.json") as fichero:
+		datos = json.load(fichero)
 	if opcionMenu=="1":
 		# Codigo que lista el nombre de todos los centros de Murcia
-		with open("colegios-murcia.json") as fichero:
-			datos = json.load(fichero)
 		for centros in datos:
 			print centros["Centro"]
 		
@@ -53,18 +52,31 @@ while True:
 		raw_input("\npulsa Intro para continuar")
 
 	elif opcionMenu=="3":
+		nombre=raw_input( "Dime elcentro de que quieres las coordenadas: ")
+		for cor in datos:
+			if cor["Centro"] == nombre:
 
-		print ""
-
+				print " La longutud es: ",cor["Longitud"]
+				print " La Latitud es: ",cor["Latitud"]
+		
+		
 		raw_input("\npulsa Intro para continuar")
 
 	elif opcionMenu=="4":
-
-		print ""
+		local=raw_input("Dime la localidad: ")
+		for nom in datos:
+			if nom["Pedania"] == local:
+				print nom["Centro"]
 
 		raw_input("\npulsa Intro para continuar")		
 
 	elif opcionMenu=="5":
+		tel=raw_input(" Dime el nº telf. o fax para saber el centro: ")
+		for telf in datos:
+			for x in telf["Telefono"]:
+				if x == tel:
+					print telf
+			
 
 		print ""
 
